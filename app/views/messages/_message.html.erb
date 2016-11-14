@@ -1,4 +1,5 @@
 <li class="message">
+  <small><%= time_tag(message.sent_at) %></small>
   <strong><%= message.sender_name %></strong> says:
   <p><%= message.body %></p>
 </li>
