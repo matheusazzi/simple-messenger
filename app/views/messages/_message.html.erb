@@ -2,4 +2,14 @@
   <small><%= time_tag(message.sent_at) %></small>
   <strong><%= message.sender_name %></strong> says:
   <p><%= message.body %></p>
+
+  <div class="attachment" data-component="attachments-<%= message.id %>">
+    <% if message.attachments.present? %>
+      <strong class="attachment-title">Attachments:</strong>
+      <%= render({
+        partial: 'attachments/attachment',
+        collection: message.attachments
+      }) %>
+    <% end %>
+  </div>
 </li>

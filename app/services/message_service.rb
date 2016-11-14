@@ -1,5 +1,5 @@
 class MessageService
-  attr_reader :data
+  attr_reader :data, :message
 
   def initialize(data)
     @data = data
@@ -14,19 +14,26 @@ class MessageService
   def render_message
     ApplicationController.renderer.render({
       partial: 'messages/message',
-      locals: message
+      locals: formatted_message
     })
   end
 
-  def message
+  def formatted_message
     { message: create_message }
   end
 
   def create_message
-    Message.create({
+    @message = Message.create({
       sender_name: data['sender_name'],
       body: data['body'],
       sent_at: Time.now
     })
+
+    add_attachments
+    message
+  end
+
+  def add_attachments
+    AttachmentBroadcastJob.perform_later(message_id: message.id, text: data['body'])
   end
 end
