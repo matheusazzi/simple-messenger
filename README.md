@@ -1,7 +1,8 @@
-# Simple messenger
-
+![Build](https://travis-ci.org/matheusazzi/simple-messenger.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/matheusazzi/simple-messenger/badges/gpa.svg)](https://codeclimate.com/github/matheusazzi/simple-messenger)
 [![Test Coverage](https://codeclimate.com/github/matheusazzi/simple-messenger/badges/coverage.svg)](https://codeclimate.com/github/matheusazzi/simple-messenger/coverage)
+
+# Simple messenger
 
 - [Staging](http://app.herokuapp.com/)
 
