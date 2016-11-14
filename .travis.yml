@@ -24,7 +24,7 @@ bundler_args: --without development
 addons:
   postgresql: '9.3'
   code_climate:
-    repo_token:
+    repo_token: a6b5c68a72844d9240d79614952ca699370fc356cf9bf4f766095fea4b01e743
 
 notifications:
   email:
