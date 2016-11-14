@@ -1,10 +1,16 @@
-<h1>Chat room</h1>
+<h1>Messages</h1>
 
-<div id="messages">
-  <%= render @messages %>
-</div>
+<% if @messages.present? %>
+  <ul class="messages" data-component="messages">
+    <%= render @messages %>
+  </ul>
+<% end %>
 
-<form>
-  <label>Say something:</label>
-  <textarea data-component="send-message"></textarea>
+<form class="send-message">
+  <div class="container send-message-form">
+    <label for="name">Your username: </label>
+    <input type="text" name="username" value="Anonymous">
+    <label for="message">Say something: </label>
+    <input type="text" class="message-input" name="message" data-component="send-message">
+  </div>
 </form>
