@@ -28,6 +28,8 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'rails-controller-testing'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
 end

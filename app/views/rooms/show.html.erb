@@ -6,11 +6,4 @@
   </ul>
 <% end %>
 
-<form class="send-message">
-  <div class="container send-message-form">
-    <label for="name">Your username: </label>
-    <input type="text" name="username" value="Anonymous">
-    <label for="message">Say something: </label>
-    <input type="text" class="message-input" name="message" data-component="send-message">
-  </div>
-</form>
+<%= render 'messages/create' %>
