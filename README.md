@@ -4,8 +4,6 @@
 
 # Simple messenger
 
-- [Staging](http://app.herokuapp.com/)
-
 ## Dependencies
 
  * Ruby 2.3.1
