@@ -11,7 +11,7 @@ describe AttachmentService do
   subject(:service) {
     described_class.new({
       message_id: message.id,
-      text: 'Have you seen my blog? matheusazzi.com or google it on google.com'
+      text: 'Have you seen my blog? matheusazzi.com or check this image google.com/logo.jpg'
     })
   }
 
@@ -23,8 +23,8 @@ describe AttachmentService do
     HTTParty.stub(:get).with('http://matheusazzi.com') {
       response.new(true, nil, '<title>Matheus</title>')
     }
-    HTTParty.stub(:get).with('http://google.com') {
-      response.new(true, nil, '<title>Google</title>')
+    HTTParty.stub(:get).with('http://google.com/logo.jpg') {
+      response.new(true, { 'Content-Type' => 'image/jpeg' }, nil)
     }
   end
 
@@ -46,7 +46,7 @@ describe AttachmentService do
 
       expect(attachments.size).to eq(2)
       expect(attachments.first.title).to eq('Matheus')
-      expect(attachments.last.title).to eq('Google')
+      expect(attachments.last.image_url).to eq('http://google.com/logo.jpg')
     end
   end
 end
