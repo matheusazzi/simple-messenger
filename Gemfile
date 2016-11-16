@@ -18,6 +18,7 @@ gem 'twitter-text'
 gem 'redis', '~> 3.0'
 
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'rspec-rails', '>= 3.5.0'
   gem 'byebug', platform: :mri
 end

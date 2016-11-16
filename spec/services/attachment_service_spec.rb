@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe AttachmentService do
   let!(:message) {
-    Message.create({
+    create(:message, {
       sender_name: 'Matheus',
-      body: 'Some text.',
-      sent_at: Time.now
+      body: 'Some text.'
     })
   }
 

@@ -2,11 +2,7 @@ require 'rails_helper'
 
 describe MessageService do
   subject(:message_params) {
-    {
-      'sender_name' => 'Anonymous',
-      'body' => 'Some body text.',
-      'sent_at' => Time.now
-    }
+    attributes_for(:message)
   }
 
   subject(:service) {

@@ -2,9 +2,10 @@ require 'rails_helper'
 
 describe RoomsController do
   describe '#show' do
+    let!(:message_one) { create(:message) }
+    let!(:message_two) { create(:message) }
+
     before do
-      Message.create!(body: 'Text 1', sender_name: 'user1', sent_at: Time.now)
-      Message.create!(body: 'Text 2', sender_name: 'user2', sent_at: Time.now)
       get :show
     end
 
@@ -15,12 +16,12 @@ describe RoomsController do
     it 'renders a list of messages' do
       expect(assigns(:messages).size).to eq 2
       expect(assigns(:messages).first.attributes).to include({
-        'body' => 'Text 1',
-        'sender_name' => 'user1'
+        'body' => message_one.body,
+        'sender_name' => message_one.sender_name
       })
       expect(assigns(:messages).last.attributes).to include({
-        'body' => 'Text 2',
-        'sender_name' => 'user2'
+        'body' => message_two.body,
+        'sender_name' => message_two.sender_name
       })
     end
 
