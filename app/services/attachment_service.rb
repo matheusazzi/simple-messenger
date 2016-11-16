@@ -1,7 +1,6 @@
-require 'httparty'
-require 'nokogiri'
-
 class AttachmentService
+  include Twitter::Extractor
+
   attr_reader :message_id, :text, :attachments
 
   def initialize(message_id:, text:)
@@ -32,10 +31,13 @@ class AttachmentService
   end
 
   def fetch_attachments
-    urls = URI.extract(text)
+    urls = extract_urls(text)
     return unless urls.present?
 
-    urls.each { |url| create_attachent(url) }
+    urls
+      .map { |url| UrlHelper.format_to_http_url(url) }
+      .uniq
+      .each { |url| create_attachent(url) }
   end
 
   private
@@ -45,7 +47,7 @@ class AttachmentService
 
     if response.success?
       @attachments <<
-        if response.headers['Content-Type'].start_with?('image')
+        if response&.headers&.fetch('Content-Type')&.start_with?('image')
           attach_image(url)
         else
           attach_page(url, response.body)
@@ -59,10 +61,11 @@ class AttachmentService
 
   def attach_page(url, body)
     page = Nokogiri::HTML(body)
+    description = page.at("meta[name='description']")
     Attachment.create({
       title: page.title,
       title_url: url,
-      description: page.at("meta[name='description']")['content'],
+      description: description ? description['content'] : nil,
       message_id: message_id
     })
   end

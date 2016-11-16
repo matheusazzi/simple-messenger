@@ -7,7 +7,7 @@ class Attachment < ApplicationRecord
     if image_url.present?
       validates_presence_of :image_url
     else
-      validates_presence_of :title, :title_url, :description
+      validates_presence_of :title, :title_url
     end
   end
 end

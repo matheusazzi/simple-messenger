@@ -5,7 +5,9 @@
 <% else %>
   <p class="message-attachment">
     <b>Title:</b> <%= attachment.title %> <br>
-    <b>Description:</b> <%= attachment.description %> <br>
+    <% if attachment.description %>
+      <b>Description:</b> <%= attachment.description %> <br>
+    <% end %>
     <b>URL:</b> <%= link_to attachment.title_url, attachment.title_url, target: :blank %>
   </p>
 <% end %>
