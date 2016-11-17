@@ -4,12 +4,26 @@
 
 # Simple messenger
 
+## How it was done
+
+All previous messages are rendered when user access the site, after it, when user sends a message, he will sent it to an API endpoint `POST (/api/v1/messages)`.
+
+When a message arrives in that endpoint I start the `MessageBroadcastJob`, and respond immediately the client-side with a `:no_content` status. I use the job because I think a real-time should not block the I/O.
+
+The `MessageBroadcastJob` broadcasts the message to all users. It uses the `MessageService`, that will create the message in database and returns the rendered message.
+
+After a message is created the `AttachmentBroadcastJob` is started, this job will use `AttachmentService` to look for URLs in the message. It'll visit each URL to get its contents.
+
+But **again**, it's on a job, so the message gets immediately back to the user (real-time), and through the job that is created after, the user will get the attachments.
+
+This way we've a real-time asynchronous chat. The user receives every message almost instantaneously and a few microseconds/seconds later, he will see the attachments.
+
 ## Dependencies
 
  * Ruby 2.3.1
  * Rails 5.0.x
  * PostgreSQL 9.3
- * Redis
+ * Redis for production
 
 ## Installation
 
