@@ -14,14 +14,29 @@ describe MessageBroadcastJob do
     described_class.perform_later(data)
   }
 
+  before do
+    allow(MessageService).to(
+      receive(:new).and_return(
+        double('Service', broadcast_message: nil)
+      )
+    )
+  end
+
   it 'queues the job' do
     expect { job }
       .to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
   end
 
-  it 'calls perform' do
-    expect(MessageService).to receive_message_chain(:new, :broadcast_message).with(
-      channel: 'room_channel'
+  it 'initializes MessageService with correct data' do
+    perform_enqueued_jobs { job }
+    expect(MessageService).to have_received(:new).with(data)
+  end
+
+  it 'broadcasts message' do
+    expect(MessageService).to(
+      receive_message_chain(:new, :broadcast_message).with(
+        channel: 'room_channel'
+      )
     )
     perform_enqueued_jobs { job }
   end
