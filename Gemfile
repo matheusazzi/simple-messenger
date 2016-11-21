@@ -16,6 +16,7 @@ gem 'twitter-text'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'factory_girl_rails'
