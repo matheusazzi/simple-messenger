@@ -4,6 +4,8 @@
 
 # Simple messenger
 
+- ![See it live!](https://simple-messenger-rails.herokuapp.com/)
+
 ## How it was done
 
 - Previous messages are rendered when user access the page, after it, when user sends a message, user will send it to an API endpoint `POST (/api/v1/messages)`.
