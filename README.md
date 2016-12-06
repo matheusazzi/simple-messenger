@@ -4,7 +4,7 @@
 
 # Simple messenger
 
-- ![See it live!](https://simple-messenger-rails.herokuapp.com/)
+- [See it live!](https://simple-messenger-rails.herokuapp.com/)
 
 ## How it was done
 
